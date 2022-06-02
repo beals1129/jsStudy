@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h4>오늘의 운동</h4>
+    <ul>
+        <script type="text/javascript">
+            //객체 연습
+            var wod = {
+                wallball : 12,
+                rowing : '10cal',
+                squat : 20,
+            }
+            //객체 개수 구하기
+            var wodCount = Object.keys(wod).length;
+
+            for (var key in wod) {
+                document.write("<li>운동종류 : "+key+" 운동 횟수 : " + wod[key] +" </li>" )
+            }
+            document.write (" <br>운동 종류 수 : " + wodCount)
+        </script>
+    </ul>
+   
+        <button onclick="checkMood('good')">good</button>
+        <button onclick="checkMood('tired')">tired</button>
+        <button onclick="checkMood('ez')">ez</button>
+    <div id="root">
+    </div>
+    <script>
+        function checkMood(mood) {
+
+            if (mood === "good") {
+                good()
+            }else if (mood === "tired") {
+                tired();
+            }else if(mood === "ez"){
+                ez();
+            }
+
+            function tired() {
+                document.getElementById('root').innerHTML = '<p>오늘의 와드는 힘들었습니다.</p>';
+            }
+            function ez() {
+                document.getElementById('root').innerHTML = '<p>오늘의 와드는 쉬웠습니다.</p>';
+            }
+            function good() {
+                document.getElementById('root').innerHTML = '<p>오늘의 와드는 딱 좋았습니다.</p>';
+            }
+
+
+        }
+
+
+        checkMood(mood);
+    </script>
+</body>
+</html>
