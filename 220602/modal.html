@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style type="text/css">
+
+    </style>
+<script type="text/javascript">
+    function CustomAlert(){
+        var callback;
+        this.alert = function(type,message,title,callback){
+            this.callback = callback;
+            document.body.innerHTML = document.body.innerHTML +
+            '<div class="popup_dim" id="dialogoverlay"></div>' +
+            '<div class="popup popup_confirm" id="dialogbox">' +
+                '<div class="popup_inner">'+
+                    '<div class="pop_cont">'+
+                        '<div class="pop_confirm">'+
+                            '<div id="dialogboxhead"></div>'+
+                            '<div id="dialogboxbody"></div>'+
+                            '<div class="btn_box02" id="dialogboxfoot"></div>'+
+                        '</div>'
+                    '</div>'
+                '</div>'
+           '</div>';
+
+            let dialogoverlay = document.getElementById('dialogoverlay');
+            let dialogbox = document.getElementById('dialogbox');
+
+            dialogoverlay.style.display= "block";
+            dialogbox.style.display="block";
+
+            document.getElementById('dialogboxhead').style.display="block";
+            
+            if(typeof title === 'undefined') {
+                document.getElementById('dialogboxhead').style.display="none";
+            } else {
+                document.getElementById('dialogboxhead').innerHTML = "<div class='title'>"+title+"</div>";
+            }
+            //title 이 없을시 undefined 로 글씨가 뜨는 것을 방지
+
+            document.getElementById('dialogboxbody').innerHTML = "<p>"+message+"</p>";
+
+            //button 
+            if (type == "alert") {
+			document.getElementById('dialogboxfoot').innerHTML = '<button type="button" class="btn_blue" onclick="customAlert.ok()"><span>확인</span></button>';
+			document.getElementById('dialogboxfoot').classList.remove('btn_box02');
+			document.getElementById('dialogboxfoot').classList.add('btn_box01');
+		}else {
+			document.getElementById('dialogboxfoot').innerHTML = '<button type="button" class="btn_blue" onclick="customAlert.ok()"><span>확인</span></button><button type="button" class="btn_line" onclick="customAlert.cancel()"><span>취소</span></button>';
+			document.getElementById('dialogboxfoot').classList.remove('btn_box01');
+			document.getElementById('dialogboxfoot').classList.add('btn_box02');
+		}
+          
+            //alert 일 경우 button이 1개 아닐경우 2개
+
+
+            //button 확인 취소 시 function
+
+            this.ok = function() {
+                document.getElementById('dialogbox').style.display = 'none';
+                document.getElementById('dialogoverlay').style.display = "none";
+                this.callback(true);
+            }
+            this.cancel = function() {
+                document.getElementById('dialogbox').style.display = 'none';
+                document.getElementById('dialogoverlay').style.display = "none";
+                this.callback(false);
+
+            }
+        }
+    }
+    let customAlert = new CustomAlert();
+
+    function showAlert(message,title){
+        customAlert.alert("alert",message,title,function(ret){
+            console.log("complete : " + ret)
+        })
+    }
+    function showConfirm(message,title){
+        customAlert.alert("confirm",message,title,function(ret){
+            console.log("complete : " + ret)
+        })
+    }
+</script>
+<body>
+    <button onclick="showAlert('Custom alert창이 열렸습니다.', 'title')">Alert</button>
+    <button onclick="showConfirm('Custom Confirm창이 열렸습니다.', 'title')">Confirm</button>
+</body>
+</html>
