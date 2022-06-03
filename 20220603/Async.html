@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function isPositive (number,resolve, reject){
+            setTimeout(() => {
+                if(typeof number === 'number') {
+                    //성공 => reslove
+                    resolve(number >=0 ? "양수" : "음수")
+                } else {
+                    // 실패 => reject
+                    reject("주어진 값이 숫자형이 아닙니다.")
+                }
+            },1000)
+            
+        }
+       // isPositive('kllk', (res) => {console.log("성공 수행 : " , res)}, (err) => { console.log("실패 수행 : " , err)})
+        
+        //promise 사용
+        function isPositiveP (number){
+            const executor = (resolve , reject) => {
+                setTimeout(() => {
+                    console.log(number);
+                    if(typeof number === 'number') {
+                    //성공 => reslove
+                    resolve(number >=0 ? "양수" : "음수")
+                } else {
+                    // 실패 => reject
+                    reject("주어진 값이 숫자형이 아닙니다.")
+                }
+                },1000)
+            }
+            const asyncTask = new Promise(executor)
+            //new 키워드로 promis의 생성자로 비동기 실행자인 executor 을 넣어주면 실행됨.
+            return asyncTask;
+            //함수가 promise를 반환한다 > 함수는 비동기 작업을 하고, 작업을 promise 로 반환
+        }
+        
+        const res = isPositiveP("hh")
+
+        //비동기처리 결과값 사용하기
+        res.then((res)=>{console.log("작업성공", res)}).catch((err) => {console.log("작업 실패", err)});
+
+    </script>
+</body>
+</html>
