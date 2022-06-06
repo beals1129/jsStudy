@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // function hello() {
+        //     return 'hello';
+        // }
+
+        // async function helloAsync(){
+        //     return "hello Async"
+        // }
+
+        // console.log(hello())
+        // console.log(helloAsync())
+
+
+        //await
+        // function delay (ms) {
+        //     return new Promise((resolve) => {
+        //         setTimeout(()=>{
+        //             resolve();
+        //         },ms)
+        //     })
+        // }
+
+
+        //여기부터
+        // function delay (ms) {
+        //     return new Promise((resolve) => {
+        //         setTimeout(resolve,ms)
+        //     })
+        // }
+
+        // async function helloAsync(){
+        //     await delay(2000)
+        //     return "hello Async"
+        // } //await 사용
+
+        // helloAsync().then((res) => {
+        //     console.log(res);
+        // })
+
+
+        //console도 await 사용하여 then 대신 호출하기
+        function delay (ms) {
+            return new Promise((resolve) => {
+                setTimeout(resolve,ms)
+            })
+        }
+
+        async function helloAsync(){
+            await delay(2000)
+            return "hello Async"
+        } //await 사용
+
+        async function main() {
+            const res = await helloAsync();
+            console.log(res);
+        }
+
+        main();
+
+    </script>
+</body>
+</html>

@@ -98,13 +98,14 @@
             console.log("C result : " , c_res);
         })
 
-        //이걸 두개로 나눌 수도 있음
 
+        //이걸 두개로 나눌 수도 있음
         const bPromiseResult = taskA(4,1).then((a_res) => {
             console.log("A result : " , a_res);
             return taskB(a_res);
         })
 
+        // 중간에 다른 코드 작성도 가능 
         bPromiseResult.then((b_res)=> {
             console.log("B result : " , b_res);
             return taskC(b_res);
