@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    ul {list-style: none; font-size: 16px; cursor: pointer;}
+    .click_text {font-size: 18px ; color: purple;}
+    .click_text li span {pointer-events: none;}
+</style>
+<body>
+    <section id="section">
+        <h1>글씨 선택하기</h1>
+        <ul class="ul_list">
+            <li class="li_list">1st<span>o</span></li>
+            <li class="li_list">2nd<span>o</span></li>
+            <li class="li_list">3rd<span>o</span></li>
+        </ul>
+        <p class="click_text"></p>
+    </section>
+    <script>
+        const section = document.querySelector("#section1");
+        const textWrap = document.querySelector(".ul_list");
+        const text = document.querySelectorAll(".li_list");
+
+        const insertText = document.querySelector('.click_text')
+        textWrap.addEventListener('click', function clickEvent(e){
+            let elem = e.target;
+            while (!elem.classList.contains('li_list')) {
+                elem =  elem.parentNode;
+
+                console.log(e.target)
+                console.log(elem)
+                break
+                if(elem.nodeName === 'BODY'){
+                    elem = null;
+                    return;
+                }
+            }
+
+            insertText.innerHTML=elem.textContent
+            console.log('li클릭')
+        })
+    
+        //공부 velog : https://velog.io/@beals1129/e.target
+    </script>
+
+</body>
+</html>
